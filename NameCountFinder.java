@@ -15,6 +15,7 @@ public class NameCountFinder {
      */
     public String getMostCommonName(List<String> nameList) {
 
+        // Make sure list isn't empty before evaluating
         if (nameList.size() > 0) {
 
             // Declare and instantiate local variables for method
@@ -26,11 +27,14 @@ public class NameCountFinder {
             // Iterate through name list and build map with count for each name
             for (String name : nameList) {
                 if (nameCountMap.get(name) == null) {
+                    // First instance of name, create new entry
                     nameCountMap.put(name, 1);
                 } else {
+                    // Name already exists, increment counter
                     int newCount = nameCountMap.get(name) + 1;
                     nameCountMap.put(name, newCount);
                     if (newCount > maxCount) {
+                        // Make sure maxCount is up to date with highest value
                         maxCount = newCount;
                     }
                 }
@@ -44,6 +48,7 @@ public class NameCountFinder {
                         // First common name with count
                         outputString = key;
                     } else {
+                        // Any subsequent common names with same count
                         outputString += ", " + key;
                     }
                     namesWithCount++;
@@ -51,8 +56,10 @@ public class NameCountFinder {
             }
             // Output the string with common name(s)
             if (namesWithCount > 1) {
+                // Multiple names, plural string
                 return "The most common names are " + outputString;
             } else {
+                // Single name, singular string
                 return "The most common name is " + outputString;
             }
         } else {
